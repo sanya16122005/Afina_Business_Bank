@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Афина Банк — Геометрическая «А»</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@200;300;400;500&family=Raleway:wght@100;200;300;400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --peach: #F4A683;
+    --peach-deep: #E8926E;
+    --peach-light: #F8C4A8;
+    --peach-soft: #FDDECF;
+    --peach-pale: #FFF0E8;
+    --white: #FFFFFF;
+    --dark: #1E1E1E;
+    --gray: #888;
+    --bg: #F7F5F3;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  .header {
+    text-align: center;
+    padding: 48px 20px 12px;
+  }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 1.4rem;
+    letter-spacing: 0.2em;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+  .header p {
+    font-size: 0.82rem;
+    color: #aaa;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    margin-top: 6px;
+    margin-bottom: 48px;
+  }
+
+  /* ===== GRID ===== */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 28px 36px;
+  }
+
+  .card {
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 36px rgba(0,0,0,0.09);
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 240px;
+    padding: 40px;
+    position: relative;
+  }
+  .logo-area.bg-peach { background: var(--peach); }
+  .logo-area.bg-white { background: var(--white); }
+  .logo-area.bg-pale { background: var(--peach-pale); }
+  .logo-area.bg-gradient { background: linear-gradient(135deg, var(--peach) 0%, var(--peach-deep) 100%); }
+
+  .card-label {
+    padding: 18px 22px;
+    background: var(--white);
+    border-top: 1px solid #f0ece8;
+  }
+  .card-label h3 {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 0.88rem;
+    letter-spacing: 0.04em;
+    color: var(--dark);
+    margin-bottom: 3px;
+  }
+  .card-label p {
+    font-size: 0.72rem;
+    color: #aaa;
+    font-weight: 300;
+  }
+
+  /* ===== FULL WIDTH HERO ===== */
+  .hero {
+    max-width: 1200px;
+    margin: 0 auto 28px;
+    padding: 0 28px;
+  }
+  .hero-card {
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+  }
+  .hero-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 320px;
+    padding: 60px 40px;
+    background: var(--white);
+    position: relative;
+  }
+
+  /* ===== LOGO STYLES ===== */
+
+  /* --- Hero: Primary horizontal lock-up --- */
+  .logo-hero {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+  .logo-hero svg { width: 62px; height: 62px; }
+  .logo-hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .logo-hero-text .name {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+    color: var(--dark);
+    line-height: 1;
+  }
+  .logo-hero-text .label {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 0.62rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--peach);
+  }
+
+  /* --- V1: Vertical centered --- */
+  .logo-v1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .logo-v1 svg { width: 56px; height: 56px; }
+  .logo-v1-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .logo-v1-text .name {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 1.3rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white);
+    line-height: 1;
+  }
+  .logo-v1-text .divider {
+    width: 24px;
+    height: 1px;
+    background: rgba(255,255,255,0.4);
+    margin: 2px 0;
+  }
+  .logo-v1-text .label {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 0.55rem;
+    letter-spacing: 0.55em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* --- V2: Icon only --- */
+  .logo-v2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo-v2 svg { width: 80px; height: 80px; }
+
+  /* --- V3: Horizontal on dark --- */
+  .logo-v3 {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .logo-v3 svg { width: 44px; height: 44px; }
+  .logo-v3-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .logo-v3-text .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1.6rem;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    line-height: 1;
+  }
+  .logo-v3-text .label {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 0.55rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--peach-light);
+  }
+
+  /* --- V4: Filled mark + elegant type --- */
+  .logo-v4 {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .logo-v4 svg { width: 50px; height: 50px; }
+  .logo-v4-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .logo-v4-text .name {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+    color: var(--peach-deep);
+    line-height: 1;
+  }
+  .logo-v4-text .label {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 200;
+    font-size: 0.55rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--peach-light);
+  }
+
+  /* --- V5: Compact app icon --- */
+  .logo-v5 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-v5-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+    background: var(--peach);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(244,166,131,0.3);
+  }
+  .logo-v5-icon svg { width: 38px; height: 38px; }
+  .logo-v5-label {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  /* --- V6: Stacked monumental --- */
+  .logo-v6 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-v6 svg { width: 52px; height: 52px; }
+  .logo-v6-text .name {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 1.15rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--peach-deep);
+    text-align: center;
+    line-height: 1;
+  }
+  .logo-v6-text .label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 200;
+    font-size: 0.5rem;
+    letter-spacing: 0.6em;
+    text-transform: uppercase;
+    color: var(--peach-light);
+    text-align: center;
+    margin-top: 4px;
+  }
+
+  /* ===== SECTION TITLES ===== */
+  .section-title {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 28px 16px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #bbb;
+  }
+
+  /* ===== USAGE STRIP ===== */
+  .usage-strip {
+    max-width: 1200px;
+    margin: 8px auto 48px;
+    padding: 0 28px;
+  }
+  .usage-card {
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: stretch;
+    min-height: 160px;
+  }
+  .usage-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 24px;
+    position: relative;
+  }
+  .usage-section:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: #f0ece8;
+  }
+  .usage-section.peach-bg {
+    background: var(--peach);
+  }
+
+  .usage-mini {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .usage-mini svg { width: 28px; height: 28px; }
+  .usage-mini .name {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    line-height: 1;
+  }
+  .usage-mini .name.c-dark { color: var(--dark); }
+  .usage-mini .name.c-white { color: var(--white); }
+  .usage-mini .name.c-peach { color: var(--peach); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Афина Банк</h1>
+  <p>Геометрическая «А» — доработанные варианты</p>
+</div>
+
+<!-- ===== HERO: Primary lock-up ===== -->
+<div class="section-title">Основной логотип</div>
+<div class="hero">
+  <div class="hero-card">
+    <div class="hero-area">
+      <div class="logo-hero">
+        <!-- Refined geometric A: clean triangle with crossbar, subtle rounded corners -->
+        <svg viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M31 5 L57 55 H5 Z" stroke="#F4A683" stroke-width="2" stroke-linejoin="round" fill="none"/>
+          <line x1="15" y1="41" x2="47" y2="41" stroke="#F4A683" stroke-width="1.5"/>
+          <circle cx="31" cy="5" r="1.5" fill="#F4A683"/>
+        </svg>
+        <div class="logo-hero-text">
+          <span class="name">Афина</span>
+          <span class="label">Банк</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Основная горизонтальная версия</h3>
+      <p>Для шапки сайта, документов, партнёрских материалов</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== VARIATIONS ===== -->
+<div class="section-title">Вариации</div>
+<div class="grid">
+
+  <!-- V1: Vertical on gradient -->
+  <div class="card">
+    <div class="logo-area bg-gradient">
+      <div class="logo-v1">
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28 4 L52 50 H4 Z" stroke="white" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+          <line x1="13" y1="37" x2="43" y2="37" stroke="white" stroke-width="1.3"/>
+          <circle cx="28" cy="4" r="1.5" fill="white"/>
+        </svg>
+        <div class="logo-v1-text">
+          <span class="name">Афина</span>
+          <div class="divider"></div>
+          <span class="label">Банк</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Вертикальная на градиенте</h3>
+      <p>Для визиток, мерча, соцсетей</p>
+    </div>
+  </div>
+
+  <!-- V2: Icon only -->
+  <div class="card">
+    <div class="logo-area bg-white">
+      <div class="logo-v2">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M40 8 L72 68 H8 Z" stroke="#F4A683" stroke-width="2" stroke-linejoin="round" fill="none"/>
+          <line x1="19.5" y1="50" x2="60.5" y2="50" stroke="#F4A683" stroke-width="1.5"/>
+          <circle cx="40" cy="8" r="2" fill="#F4A683"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Знак отдельно</h3>
+      <p>Фавикон, водяной знак, паттерн</p>
+    </div>
+  </div>
+
+  <!-- V4: Filled triangle mark -->
+  <div class="card">
+    <div class="logo-area bg-white">
+      <div class="logo-v4">
+        <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M25 4 L47 44 H3 Z" fill="#FFF0E8" stroke="#F4A683" stroke-width="1.5" stroke-linejoin="round"/>
+          <line x1="11" y1="32" x2="39" y2="32" stroke="#F4A683" stroke-width="1.3"/>
+          <circle cx="25" cy="4" r="1.5" fill="#F4A683"/>
+        </svg>
+        <div class="logo-v4-text">
+          <span class="name">Афина</span>
+          <span class="label">Банк</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Заливка с контуром</h3>
+      <p>Более мягкий, тёплый вариант</p>
+    </div>
+  </div>
+
+  <!-- V5: App icon -->
+  <div class="card">
+    <div class="logo-area bg-pale">
+      <div class="logo-v5">
+        <div class="logo-v5-icon">
+          <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 4 L34 32 H4 Z" stroke="white" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+            <line x1="9.5" y1="23.5" x2="28.5" y2="23.5" stroke="white" stroke-width="1.3"/>
+            <circle cx="19" cy="4" r="1.3" fill="white"/>
+          </svg>
+        </div>
+        <span class="logo-v5-label">Афина Банк</span>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Иконка приложения</h3>
+      <p>Для App Store, Google Play, PWA</p>
+    </div>
+  </div>
+
+  <!-- V6: Stacked compact -->
+  <div class="card">
+    <div class="logo-area bg-white">
+      <div class="logo-v6">
+        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26 5 L48 45 H4 Z" stroke="#E8926E" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+          <line x1="12" y1="33" x2="40" y2="33" stroke="#E8926E" stroke-width="1.3"/>
+          <circle cx="26" cy="5" r="1.5" fill="#E8926E"/>
+        </svg>
+        <div class="logo-v6-text">
+          <span class="name">Афина Банк</span>
+          <span class="label">Цифровой банкинг</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Компактная вертикальная</h3>
+      <p>Для подвала сайта, штампов, печатей</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== USAGE STRIP ===== -->
+<div class="section-title">Варианты использования</div>
+<div class="usage-strip">
+  <div class="usage-card">
+    <!-- White bg -->
+    <div class="usage-section">
+      <div class="usage-mini">
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 3 L25 24 H3 Z" stroke="#F4A683" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+          <line x1="7" y1="17.5" x2="21" y2="17.5" stroke="#F4A683" stroke-width="0.9"/>
+          <circle cx="14" cy="3" r="0.9" fill="#F4A683"/>
+        </svg>
+        <span class="name c-dark">Афина</span>
+      </div>
+    </div>
+    <!-- Pale bg -->
+    <div class="usage-section">
+      <div class="usage-mini">
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 3 L25 24 H3 Z" stroke="#E8926E" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+          <line x1="7" y1="17.5" x2="21" y2="17.5" stroke="#E8926E" stroke-width="0.9"/>
+          <circle cx="14" cy="3" r="0.9" fill="#E8926E"/>
+        </svg>
+        <span class="name c-peach">Афина</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

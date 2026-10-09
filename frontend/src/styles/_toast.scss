@@ -1,0 +1,120 @@
+@use 'variables' as v;
+
+// ──────────────────────────────────────────────────────────
+// TOAST STACK — fixed bottom-left, выше floating-toggle (z=1000).
+// ──────────────────────────────────────────────────────────
+.toast-stack {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  pointer-events: none;
+  max-width: min(420px, calc(100vw - 36px));
+
+  @media (max-width: 640px) {
+    left: 12px;
+    right: 12px;
+    bottom: 80px; // не наезжаем на theme-toggle--floating
+    max-width: none;
+  }
+}
+
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, var(--afina-card-bg-1) 0%, var(--afina-card-bg-2) 100%);
+  border: 1px solid var(--afina-card-border-warm);
+  box-shadow: var(--afina-card-shadow);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  color: v.$text;
+  font-size: 14px;
+  line-height: 1.45;
+  animation: toast-in 0.22s cubic-bezier(.4,0,.2,1);
+
+  &__icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__msg {
+    flex: 1;
+    min-width: 0;
+    word-break: break-word;
+  }
+
+  &__close {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 7px;
+    border: 0;
+    background: transparent;
+    color: v.$text-light;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.18s ease, color 0.18s ease;
+    &:hover { background: rgba(0,0,0, 0.06); color: v.$text; }
+    html[data-theme="dark"] &:hover { background: rgba(255,255,255, 0.08); }
+  }
+
+  &--success { border-left: 3px solid v.$success; .toast__icon { color: v.$success; } }
+  &--danger  { border-left: 3px solid v.$danger;  .toast__icon { color: v.$danger; } }
+  &--warning { border-left: 3px solid v.$warning; .toast__icon { color: v.$warning; } }
+  &--info    { border-left: 3px solid v.$primary; .toast__icon { color: v.$primary; } }
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ──────────────────────────────────────────────────────────
+// SKELETON
+// ──────────────────────────────────────────────────────────
+.skeleton {
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    var(--afina-card-bg-2) 0%,
+    var(--afina-card-bg-1) 50%,
+    var(--afina-card-bg-2) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+  vertical-align: middle;
+}
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton-card {
+  display: grid;
+  gap: 10px;
+}
+
+// ──────────────────────────────────────────────────────────
+// CONFIRM MODAL — обёртка над .modal с уплотнённым телом.
+// ──────────────────────────────────────────────────────────
+.confirm-modal__body {
+  font-size: 15px;
+  line-height: 1.55;
+  color: v.$text;
+
+  p { margin: 0 0 8px; }
+  p:last-child { margin-bottom: 0; }
+}

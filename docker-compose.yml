@@ -1,0 +1,102 @@
+name: final_backend
+
+# Окружение: cp env/local.env .env  или  ./scripts/switch-env.sh local
+# По умолчанию API = http://127.0.0.1:8000 (локальный запуск).
+# Gateway (nginx+SSL) запускается с профилем prod: COMPOSE_PROFILES=prod (см. env/prod-server.env).
+
+services:
+  gateway:
+    profiles: ["prod"]
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./429.html:/usr/share/nginx/html/429.html:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    depends_on:
+      - frontend
+      - backend
+
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - backend
+    environment:
+      REACT_APP_API_URL: ${REACT_APP_API_URL:-http://127.0.0.1:8000}
+      DANGEROUSLY_DISABLE_HOST_CHECK: "true"
+      HOST: "0.0.0.0"
+      BROWSER: "none"
+      WDS_SOCKET_PORT: "0"
+
+  backend:
+    build: ./Backend
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:5000"
+    deploy:
+      resources:
+        limits:
+          memory: 1024M
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=bankdb;Username=postgres;Password=${POSTGRES_PASSWORD:-postgres}
+      Redis__Connection: redis:6379
+      Jwt__Key: ${JWT_KEY:-CHANGE_ME_dev_only_jwt_key_at_least_32_chars}
+      Llm__OllamaUrl: ${Llm__OllamaUrl:-http://host.docker.internal:11434}
+    volumes:
+      - ./Backend/fraud_model.zip:/app/fraud_model.zip
+
+  postgres:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: bankdb
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    command: ["postgres", "-c", "shared_buffers=512MB", "-c", "max_connections=100", "-c", "work_mem=16MB"]
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redisdata:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata: {}
+  redisdata: {}

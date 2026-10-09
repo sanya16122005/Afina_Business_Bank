@@ -1,0 +1,46 @@
+// ── ОСНОВНЫЕ ЦВЕТА (Brand Kit) ───────────────
+$primary:        #F4A683;
+$primary-dark:   #E8926E;
+$primary-light:  rgba(244,166,131, 0.15);
+$primary-mid:    #F8C4A8;
+$primary-pale:   #FFF0E8;
+
+// Платина / серебро
+$platinum:       #e8e8e8;
+
+// Антрацит
+$anthracite:     #1a1a2e;
+
+// Статусы
+$success:        #16a34a;
+$success-light:  rgba(22,163,74, 0.12);
+$danger:         #dc2626;
+$danger-light:   rgba(220,38,38, 0.10);
+$warning:        #d97706;
+$warning-light:  rgba(217,119,6, 0.10);
+
+// Фон — тёплый серый для glassmorphism
+$bg:             var(--afina-bg, #C7C2BB);
+$bg-soft:        var(--afina-bg-soft, #D8D3CD);
+$bg-deep:        var(--afina-bg-deep, #B9B4AD);
+$sidebar-bg:     var(--afina-sidebar-bg, rgba(255,255,255, 0.55));
+$surface:        var(--afina-surface, rgba(255,255,255, 0.14));
+$surface-strong: var(--afina-surface-strong, rgba(255,255,255, 0.22));
+$surface-soft:   var(--afina-surface-soft, rgba(255,255,255, 0.50));
+$border:         var(--afina-border, rgba(0,0,0, 0.08));
+
+// Типографика
+$text:           var(--afina-text, #131323);
+$text-muted:     var(--afina-text-muted, rgba(19,19,35, 0.92));
+$text-light:     var(--afina-text-light, rgba(19,19,35, 0.78));
+$focus-ring:     var(--afina-focus-ring, rgba(244,166,131, 0.22));
+
+// Размеры
+$radius-sm:      10px;
+$radius:         16px;
+$radius-lg:      22px;
+$shadow:         0 4px 18px rgba(0,0,0, 0.08);
+
+// Layout
+$sidebar-width:  260px;
+$header-height:  64px;

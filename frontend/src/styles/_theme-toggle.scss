@@ -1,0 +1,64 @@
+@use 'variables' as v;
+
+// ──────────────────────────────────────────────────────────
+// THEME TOGGLE — встроенный в шапку или плавающий поверх UI.
+// ──────────────────────────────────────────────────────────
+.theme-toggle {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border: 1px solid v.$border;
+  background: v.$surface-strong;
+  color: v.$text;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+
+  &:hover {
+    background: v.$surface-soft;
+    border-color: rgba(244,166,131, 0.32);
+    color: v.$primary;
+  }
+
+  &:active { transform: scale(0.96); }
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px v.$focus-ring;
+  }
+
+  // Плавающий вариант — закреплён в правом нижнем углу, всегда сверху UI.
+  &--floating {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    z-index: 1000;
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    box-shadow:
+      0 8px 24px rgba(0,0,0, 0.18),
+      0 2px 6px rgba(0,0,0, 0.10),
+      inset 0 1px 0 var(--afina-card-glass-highlight, rgba(255,255,255, 0.35));
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 12px 32px rgba(0,0,0, 0.22),
+        0 3px 10px rgba(0,0,0, 0.12),
+        inset 0 1px 0 var(--afina-card-glass-highlight, rgba(255,255,255, 0.42));
+    }
+
+    &:active { transform: translateY(0) scale(0.96); }
+
+    @media (max-width: 640px) {
+      right: 12px;
+      bottom: 12px;
+      width: 40px;
+      height: 40px;
+    }
+  }
+}

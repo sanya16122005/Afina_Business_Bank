@@ -1,0 +1,182 @@
+@use 'variables' as v;
+
+// Без декоративных иконок в заголовке (только текст)
+.section-title--plain svg {
+  display: none;
+}
+
+.exchange-rates {
+  margin-bottom: 24px;
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  &__date {
+    font-size: 12px;
+    font-weight: 400;
+    color: v.$text-muted;
+    margin-left: auto;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+
+}
+
+.exchange-rate-card {
+  background: v.$surface-soft;
+  border: 1px solid v.$border;
+  border-radius: v.$radius;
+  padding: 14px 16px;
+
+  &__code {
+    font-family: 'Jost', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: v.$primary-dark;
+    margin-bottom: 8px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: v.$text;
+    margin-top: 6px;
+
+    strong {
+      margin-left: auto;
+      font-variant-numeric: tabular-nums;
+    }
+
+    &--sell {
+      color: v.$primary-dark;
+    }
+  }
+}
+
+.exchange-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  align-items: start;
+
+  &--single {
+    grid-template-columns: 1fr;
+    max-width: 560px;
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.exchange-form {
+  &__currencies {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 12px;
+    align-items: end;
+    margin-bottom: 8px;
+  }
+
+  &__swap {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(244, 166, 131, 0.35);
+    background: v.$primary-light;
+    color: v.$primary-dark;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-bottom: 4px;
+    transition: transform 0.15s ease, background 0.15s ease;
+
+    &:hover {
+      transform: rotate(180deg);
+      background: rgba(244, 166, 131, 0.22);
+    }
+  }
+}
+
+.exchange-preview {
+  background: v.$primary-light;
+  border: 1px solid rgba(244, 166, 131, 0.25);
+  border-radius: v.$radius-sm;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+
+  &__main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 16px;
+    flex-wrap: wrap;
+  }
+
+  &__meta {
+    font-size: 12px;
+    color: v.$text-muted;
+    text-align: center;
+    margin-top: 6px;
+  }
+}
+
+.cashier-rates-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  background: v.$surface-soft;
+  border: 1px solid v.$border;
+  border-radius: v.$radius;
+
+  &__label {
+    font-size: 13px;
+    font-weight: 500;
+    color: v.$text;
+    width: 100%;
+  }
+
+  &__item {
+    font-size: 13px;
+    color: v.$text-muted;
+
+    strong {
+      color: v.$text;
+      margin-left: 4px;
+    }
+  }
+}
+
+.admin-exchange-settings {
+  margin-top: 20px;
+
+  &__form {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 12px;
+    align-items: end;
+
+    @media (max-width: 700px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.spin {
+  animation: spinner-rotate 0.7s linear infinite;
+}

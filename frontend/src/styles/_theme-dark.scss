@@ -1,0 +1,285 @@
+// ──────────────────────────────────────────────────────────
+// DARK THEME — переопределение токенов для html[data-theme="dark"].
+// Брэнд-primary остаётся тем же оранжево-персиковым (играет на тёмном).
+// ──────────────────────────────────────────────────────────
+html[data-theme="dark"] {
+  --afina-bg: #14141d;
+  --afina-bg-soft: #1c1c28;
+  --afina-bg-deep: #0e0e15;
+  --afina-sidebar-bg: rgba(28,28,40, 0.72);
+  --afina-surface: rgba(255,255,255, 0.04);
+  --afina-surface-strong: rgba(255,255,255, 0.08);
+  --afina-surface-soft: rgba(255,255,255, 0.12);
+  --afina-border: rgba(255,255,255, 0.10);
+  --afina-text: #ececf2;
+  --afina-text-muted: rgba(236,236,242, 0.86);
+  --afina-text-light: rgba(236,236,242, 0.64);
+  --afina-focus-ring: rgba(244,166,131, 0.36);
+  --afina-body-glow-1: rgba(244,166,131, 0.10);
+  --afina-body-glow-2: rgba(76,76,108, 0.18);
+  --afina-selection-bg: rgba(244,166,131, 0.32);
+  --afina-selection-color: #ececf2;
+  --afina-overlay: rgba(14,14,21, 0.72);
+
+  // ── Карточки и стеклянные поверхности в тёмной теме ──
+  --afina-card-bg-1: rgba(28,28,40, 0.88);
+  --afina-card-bg-2: rgba(20,20,29, 0.82);
+  --afina-card-border-warm: rgba(244,166,131, 0.20);
+  --afina-card-border-warm-soft: rgba(244,166,131, 0.14);
+  --afina-card-shadow:
+    0 12px 34px rgba(0,0,0, 0.42),
+    0 2px 8px rgba(0,0,0, 0.30),
+    inset 0 1px 0 rgba(255,255,255, 0.06);
+  --afina-card-shine: linear-gradient(180deg, rgba(255,255,255, 0.06) 0%, transparent 100%);
+  --afina-card-row-hover: rgba(244,166,131, 0.10);
+  --afina-card-glass-highlight: rgba(255,255,255, 0.08);
+  --afina-modal-overlay: rgba(14,14,21, 0.72);
+
+  // ── Лендинг (публичная) ──
+  --landing-bg: #14141d;
+  --landing-text: #ececf2;
+  --landing-text-muted: rgba(236,236,242, 0.92);
+  --landing-text-light: rgba(236,236,242, 0.72);
+  --landing-border: rgba(255,255,255, 0.10);
+  --landing-footer-bg: rgba(20,20,29, 0.62);
+}
+
+// ──────────────────────────────────────────────────────────
+// DARK THEME: чиним «слишком серые» плашки.
+// На светлой теме у многих карточек есть `box-shadow: inset 0 1px 0
+// rgba(255,255,255, 0.16)` — белый блик. На тёмном фоне он превращается
+// в яркую серую полосу сверху, и сам прямоугольник выглядит как
+// контрастная серая плашка. Здесь убираем блик и слегка приглушаем
+// фон у самых заметных компонентов.
+// ──────────────────────────────────────────────────────────
+html[data-theme="dark"] {
+  .profile-action-row,
+  .session-bar,
+  .system-notice,
+  .auth-page__demo,
+  .auth-page__hint,
+  .auth-page__register-note,
+  .empty-state {
+    box-shadow: none;
+  }
+
+  // Вход / регистрация: «Афина» и «Банк» читаемы на тёмном бренд-блоке
+  .auth-page__brand-logo {
+    color: var(--afina-text);
+  }
+
+  // Поверхности чуть глубже — меньше «выпрыгивают» из фона.
+  .profile-action-row,
+  .auth-page__demo,
+  .auth-page__hint {
+    background: var(--afina-surface);
+    border-color: rgba(255,255,255, 0.08);
+  }
+
+  // Skeleton-плашки в тёмной теме слишком светлые.
+  .skeleton {
+    background: rgba(255,255,255, 0.06);
+  }
+
+  // alert--warning / alert--info на dark становятся слишком жёлтыми/
+  // голубыми — приглушаем рамку и фон.
+  .alert--warning {
+    background: rgba(217,119,6, 0.12);
+    border-color: rgba(217,119,6, 0.28);
+  }
+  .alert--info {
+    background: rgba(56,189,248, 0.10);
+    border-color: rgba(56,189,248, 0.24);
+  }
+
+  // Inset white highlight на dark — приглушаем глобально для
+  // .stat-card.card (самые заметные на dashboard'е).
+  .stat-card.card {
+    box-shadow:
+      0 12px 34px rgba(0,0,0, 0.42),
+      0 2px 8px rgba(0,0,0, 0.30),
+      inset 0 1px 0 rgba(255,255,255, 0.04);
+  }
+
+  // .btn--ghost (фильтры «Расчётные», «Сберегательные», «Экспорт» и т.д.)
+  // в светлой теме — белая полупрозрачная плашка. На dark получается
+  // ярко-серый прямоугольник, выпрыгивает из общей палитры.
+  .btn--ghost {
+    background: rgba(255,255,255, 0.05);
+    border-color: rgba(255,255,255, 0.10);
+    color: var(--afina-text-muted);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255, 0.04),
+      0 1px 3px rgba(0,0,0, 0.20);
+
+    &:hover {
+      background: rgba(244,166,131, 0.12);
+      border-color: rgba(244,166,131, 0.32);
+      color: #ffd1b8;
+      box-shadow:
+        0 0 0 3px rgba(244,166,131, 0.10),
+        0 2px 10px rgba(0,0,0, 0.30);
+    }
+  }
+
+  // Filter-bar search: в светлой теме это белая (72%) пилюля, на dark
+  // она засвечивает всю секцию. Делаем её тёмной полупрозрачной.
+  .filter-bar__search {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.10);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 1px 4px rgba(0, 0, 0, 0.20);
+
+    &:focus-within {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(244, 166, 131, 0.32);
+      box-shadow:
+        0 0 0 4px rgba(244, 166, 131, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 3px 10px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  .filter-bar__search input {
+    background: transparent;
+    color: var(--afina-text);
+
+    &::placeholder {
+      color: rgba(236, 236, 242, 0.55);
+    }
+  }
+
+  // Сам filter-bar (контейнер) тоже на 16% белом — чуть мягче в dark.
+  .filter-bar {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 8px 30px rgba(0, 0, 0, 0.30),
+      inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+
+  // ── Аналитика ─────────────────────────────────────────────
+  // Карточка «Риск и контроль»: hero-плашка со «Средним риском»
+  // в светлой теме имеет светло-кремовый градиент. На dark текст
+  // (label, value, meta) — светло-серый и сливается. Делаем фон
+  // тёмно-сине-серым и контрастный текст.
+  .analytics-risk-hero {
+    background: linear-gradient(135deg, rgba(28, 28, 40, 0.88) 0%, rgba(20, 20, 29, 0.74) 100%);
+    border-color: rgba(244, 166, 131, 0.18);
+  }
+
+  .analytics-risk-hero__label {
+    color: rgba(236, 236, 242, 0.78);
+    font-weight: 500;
+  }
+
+  .analytics-risk-hero__value {
+    color: var(--afina-text);
+  }
+
+  .analytics-risk-hero__meta {
+    color: rgba(236, 236, 242, 0.68);
+  }
+
+  .analytics-risk-hero__ring {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.10);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  // Pills внизу «Активных кассовых сеансов» / «Средний риск события»
+  // — то же самое: светлая плашка из светлой темы → нечитаемо.
+  .analytics-summary-pill {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.10);
+
+    span {
+      color: rgba(236, 236, 242, 0.72);
+    }
+
+    strong {
+      color: var(--afina-text);
+    }
+  }
+
+  // ── Лендинг: кнопки «Войти» ───────────────────────────────
+  // Светлая тема: rgba(255,255,255,0.56) + белый inset-блик. На тёмном
+  // фоне лендинга (#14141d) это ярко-серые плашки. Делаем тёмную
+  // полупрозрачную подложку без белого блика и бренд-подсветку на hover.
+  .landing-nav__btn,
+  .landing-btn--outline {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: var(--landing-text);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 1px 4px rgba(0, 0, 0, 0.22);
+
+    &:hover {
+      background: rgba(244, 166, 131, 0.14);
+      border-color: rgba(244, 166, 131, 0.36);
+      color: #ffd1b8;
+      box-shadow:
+        0 0 0 3px rgba(244, 166, 131, 0.10),
+        0 4px 14px rgba(0, 0, 0, 0.30);
+    }
+  }
+
+  .landing-btn--ghost {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.10);
+    color: var(--landing-text-muted);
+
+    &:hover {
+      background: rgba(244, 166, 131, 0.14);
+      border-color: rgba(244, 166, 131, 0.32);
+      color: #ffd1b8;
+    }
+  }
+
+  // ── Soft-кнопки кассира/антифрода ─────────────────────────
+  // На светлой теме у них тёмный текст на бледной заливке. На тёмном
+  // фоне тёмный текст нечитаем — даём светлый акцентный текст и чуть
+  // плотнее заливку/рамку (тот же приём, что у .btn--ghost выше).
+  .btn--soft-primary {
+    background: rgba(244, 166, 131, 0.16);
+    border-color: rgba(244, 166, 131, 0.34);
+    color: #ffd1b8;
+    &:hover {
+      background: rgba(244, 166, 131, 0.26);
+      border-color: rgba(244, 166, 131, 0.52);
+      color: #ffe0cd;
+    }
+  }
+  .btn--soft-warning {
+    background: rgba(217, 119, 6, 0.18);
+    border-color: rgba(217, 119, 6, 0.38);
+    color: #fcd9a8;
+    &:hover {
+      background: rgba(217, 119, 6, 0.28);
+      border-color: rgba(217, 119, 6, 0.56);
+      color: #ffe8c6;
+    }
+  }
+  .btn--soft-danger {
+    background: rgba(220, 38, 38, 0.16);
+    border-color: rgba(220, 38, 38, 0.38);
+    color: #ffb4ad;
+    &:hover {
+      background: rgba(220, 38, 38, 0.26);
+      border-color: rgba(220, 38, 38, 0.56);
+      color: #ffcdc8;
+    }
+  }
+  .btn--soft-success {
+    background: rgba(22, 163, 74, 0.16);
+    border-color: rgba(22, 163, 74, 0.38);
+    color: #86e6ab;
+    &:hover {
+      background: rgba(22, 163, 74, 0.26);
+      border-color: rgba(22, 163, 74, 0.56);
+      color: #a8f0c4;
+    }
+  }
+}

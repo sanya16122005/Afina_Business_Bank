@@ -1,0 +1,59 @@
+!DOCTYPE html
+html
+head
+    titleSignalR Test — Афинаtitle
+    script src=httpscdnjs.cloudflare.comajaxlibsmicrosoft-signalr8.0.0signalr.min.jsscript
+head
+body style=font-family Arial; padding 20px; background #f5f3f0;
+    h2Тест SignalR — Fraud Alertsh2
+    div
+        input id=token placeholder=Вставь JWT токен кассираадмина style=width 500px; padding 8px;
+        button onclick=connect()Подключитьсяbutton
+    div
+    div id=status style=margin 10px 0; color gray;Отключёнdiv
+    div id=alerts style=margin-top 20px;div
+
+    script
+        let connection;
+
+        function connect() {
+            const token = document.getElementById('token').value;
+            document.getElementById('status').innerText = 'Подключение...';
+
+            connection = new signalR.HubConnectionBuilder()
+                .withUrl('httplocalhost8000hubsfraud', {
+                    accessTokenFactory () = token
+                })
+                .withAutomaticReconnect()
+                .build();
+
+            connection.on('newFraudAlert', (data) = {
+                const div = document.createElement('div');
+                div.style = 'backgroundwhite; border-left4px solid #E8926E; padding15px; margin10px 0; border-radius8px;';
+                div.innerHTML = `
+                    bFRAUD ALERTbbr
+                    Alert ID ${data.alertId}br
+                    Сумма ${data.amount} ${data.currency}br
+                    Риск ${(data.riskScore  100).toFixed(0)}%br
+                    Тип ${data.anomalyType}br
+                    Клиент ${data.ownerFullName}br
+                    Счёт ${data.accountNumber}br
+                    ${data.triggerReason ? `<div style="margin-top:8px; padding:10px; background:#fff5ef; border:1px solid #fdded0; border-radius:8px;"><b>Аналитика:</b><br>${data.triggerReason}</div>` : ''}
+                    small${data.notificationText}small
+                `;
+                document.getElementById('alerts').prepend(div);
+            });
+
+            connection.start()
+                .then(() = {
+                    document.getElementById('status').innerText = 'Подключён к hubsfraud';
+                    document.getElementById('status').style.color = 'green';
+                })
+                .catch(err = {
+                    document.getElementById('status').innerText = 'Ошибка ' + err;
+                    document.getElementById('status').style.color = 'red';
+                });
+        }
+    script
+body
+html

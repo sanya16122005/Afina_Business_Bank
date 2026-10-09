@@ -1,0 +1,163 @@
+// ──────────────────────────────────────────────────────────
+// UTILITY CLASSES — заменяют типовые inline styles.
+// Принцип: мелкие точечные хелперы, без полноценного Tailwind.
+// ──────────────────────────────────────────────────────────
+.u-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &--6  { gap: 6px; }
+  &--8  { gap: 8px; }
+  &--12 { gap: 12px; }
+  &--16 { gap: 16px; }
+
+  &--start { align-items: flex-start; }
+  &--end   { align-items: flex-end; }
+  &--wrap  { flex-wrap: wrap; }
+}
+
+.u-actions {
+  display: flex;
+  gap: 6px;
+
+  &--8  { gap: 8px; }
+  &--12 { gap: 12px; }
+}
+
+.u-text-muted { color: var(--afina-text-light); }
+.u-text-bold  { font-weight: 600; }
+.u-text-700   { font-weight: 700; }
+.u-text-sm    { font-size: 12px; }
+.u-text-mono  { font-family: monospace; font-size: 12px; }
+
+.u-cell-muted-sm {
+  font-size: 12px;
+  color: var(--afina-text-light);
+}
+
+.u-meta-note {
+  color: var(--afina-text-light);
+  font-size: 12px;
+}
+
+.u-empty-cell {
+  text-align: center;
+  color: var(--afina-text-light);
+  padding: 32px;
+}
+
+.u-loading-card {
+  text-align: center;
+  padding: 40px;
+}
+
+.u-mb-4  { margin-bottom: 4px; }
+.u-mb-12 { margin-bottom: 12px; }
+.u-mb-16 { margin-bottom: 16px; }
+.u-mb-20 { margin-bottom: 20px; }
+.u-mb-24 { margin-bottom: 24px; }
+.u-mb-28 { margin-bottom: 28px; }
+.u-mt-8  { margin-top: 8px; }
+.u-mt-16 { margin-top: 16px; }
+
+.u-text-500 { font-weight: 500; }
+.u-text-success { color: var(--afina-success); }
+.u-text-danger  { color: var(--afina-danger); }
+
+.u-nowrap { white-space: nowrap; }
+.u-cell-mono-muted {
+  font-family: monospace;
+  font-size: 12px;
+  color: var(--afina-text-light);
+}
+
+.u-empty-cell--big {
+  text-align: center;
+  color: var(--afina-text-light);
+  padding: 24px;
+}
+
+.u-icon-hint {
+  margin-bottom: 12px;
+  opacity: 0.7;
+}
+
+.filter-bar--flat {
+  margin: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  backdrop-filter: none;
+  align-items: end;
+}
+
+.filter-bar__col {
+  flex: 1 1 200px;
+  margin-bottom: 0 !important;
+
+  &--160 { flex-basis: 160px; }
+}
+
+.reports-export-hint {
+  padding: 0 16px 16px;
+  color: var(--afina-text-light);
+  font-size: 13px;
+}
+
+.reports-export-error {
+  margin: 0 16px 16px;
+}
+
+.fraud-llm-cell {
+  max-width: 420px;
+  white-space: normal;
+  line-height: 1.45;
+}
+
+.profile-card--wide { max-width: 100% !important; }
+
+.debtor-badge { margin-left: 6px; }
+
+.empty-state-block {
+  padding: 24px;
+  color: var(--afina-text-light);
+}
+
+.form-group--flush { margin-bottom: 0 !important; }
+
+.section-title--gap-top { margin: 24px 0 14px; }
+.section-title--mb-14   { margin-bottom: 14px; }
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.profile-card--bare {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.form-checkbox-stack {
+  display: grid;
+  gap: 10px;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--afina-text);
+  cursor: pointer;
+
+  input[type="checkbox"] {
+    accent-color: #F4A683;
+  }
+}

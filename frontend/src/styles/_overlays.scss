@@ -1,0 +1,77 @@
+@use 'variables' as v;
+
+// ──────────────────────────────────────────────────────────
+// ERROR BOUNDARY (полноэкранный fallback)
+// ──────────────────────────────────────────────────────────
+.error-boundary {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: v.$bg;
+}
+
+.error-boundary__card {
+  max-width: 520px;
+  width: 100%;
+  padding: 32px;
+  border-radius: v.$radius-lg;
+  background: v.$surface;
+  border: 1px solid v.$border;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.12);
+  text-align: center;
+}
+
+.error-boundary__title {
+  font-family: 'Jost', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: v.$text;
+}
+
+.error-boundary__hint {
+  font-size: 14px;
+  color: v.$text-muted;
+  margin-bottom: 20px;
+}
+
+.error-boundary__stack {
+  text-align: left;
+  font-size: 11px;
+  background: rgba(0,0,0,0.04);
+  border-radius: 8px;
+  padding: 12px;
+  max-height: 200px;
+  overflow: auto;
+  margin-bottom: 16px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+// ──────────────────────────────────────────────────────────
+// ROUTE LAZY FALLBACK (Suspense spinner)
+// ──────────────────────────────────────────────────────────
+.route-fallback {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: v.$bg;
+  z-index: 9999;
+}
+
+.route-fallback__spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(244,166,131, 0.2);
+  border-top-color: v.$primary;
+  border-radius: 50%;
+  animation: route-fallback-spin 0.8s linear infinite;
+}
+
+@keyframes route-fallback-spin {
+  to { transform: rotate(360deg); }
+}
